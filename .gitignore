@@ -1,0 +1,9 @@
+*.suo
+*.user
+bin
+obj
+Temp
+/src/Library
+/src/Assets/Plugins/Editor/Atom.cs
+/src/src.userprefs
+/*.unitypackage
