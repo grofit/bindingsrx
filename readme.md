@@ -20,6 +20,7 @@ myInputField.BindValueTo(someReactiveProperty);
 - Supports one and two way binding
 - Helpers for creating your own custom bindings
 - Works with `ReactiveProperty<T>` and regular values
+- Simplifies complex UI interactions, such as binding dropdown options
 
 As mentioned it works with the unirx `ReactiveProperty<T>` but does not need them, so for example if I had a reactive property I could do:
 
@@ -41,6 +42,18 @@ You can also specify if you want one way or two way bindings explicitly.
 var myReactiveProperty = new ReactiveProperty<float>(1.0f);
 mySlider.BindValueTo(myReactiveProperty, BindingTypes.OneWay);
 ```
+
+Here is an example of making a dropdown in the UI bind to a reactive collection:
+
+```
+var exampleOptions = new ReactiveCollection<string>();
+exampleOptions.Add("Option 1");
+exampleOptions.Add("Option 2");
+exampleOptions.Add("Some Other Option");
+
+someDropdownUIElement.BindOptionsTo(exampleOptions);
+```
+
 
 ## Installation
 

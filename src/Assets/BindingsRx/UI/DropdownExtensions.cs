@@ -73,5 +73,18 @@ namespace BindingsRx.UI
             
             return new CompositeDisposable(addSubscription, removeSubscription);
         }
+
+        public static IDisposable BindOptionsTo(this Dropdown input, IReactiveCollection<Dropdown.OptionData> options)
+        {
+            var addSubscription = options.ObserveAdd().Subscribe(x => input.options.Insert(x.Index, x.Value));
+            var removeSubscription = options.ObserveRemove().Subscribe(x => input.options.RemoveAt(x.Index));
+
+            input.options.Clear();
+
+            foreach (var option in options)
+            { input.options.Add(option); }
+
+            return new CompositeDisposable(addSubscription, removeSubscription);
+        }
     }
 }
