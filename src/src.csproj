@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9EC8D40B-48FB-E5C7-FE7D-C54A8B38E27C}</ProjectGuid>
+    <ProjectGuid>{7C30CA80-AAF2-6895-C66E-ABBB6F8A6825}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -77,9 +75,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="bindingsrx.Plugins.csproj">
-      <Project>{94F777BC-66AC-D4BE-0E59-4620F3824660}</Project>
-      <Name>bindingsrx.Plugins</Name>
+    <ProjectReference Include="src.Plugins.csproj">
+      <Project>{6001150F-B5BC-D04E-994E-425096E0FFE6}</Project>
+      <Name>src.Plugins</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -88,8 +86,8 @@
     <Compile Include="Assets\BindingsRx\GameObjects\GameObjectExtensions.cs" />
     <Compile Include="Assets\BindingsRx\GameObjects\MonobehaviourExtensions.cs" />
     <Compile Include="Assets\BindingsRx\GameObjects\RectTransformExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\Generic\GenericBindings.cs" />
     <Compile Include="Assets\BindingsRx\GameObjects\TransformExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Generic\GenericBindings.cs" />
     <Compile Include="Assets\BindingsRx\UI\CanvasElementExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\DropdownExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\InputFieldExtensions.cs" />
