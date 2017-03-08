@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using BindingsRx.Generic;
@@ -58,10 +59,13 @@ namespace BindingsRx.UI
                 input.options.Insert(x.Index, newOption);
             });
 
-            var removeSubscription = options.ObserveRemove().Subscribe(x =>
+            var updateSubscription = options.ObserveReplace().Subscribe(x =>
             {
-                input.options.RemoveAt(x.Index);
+                var existingOption = input.options[x.Index];
+                existingOption.text = x.NewValue;
             });
+
+            var removeSubscription = options.ObserveRemove().Subscribe(x => input.options.RemoveAt(x.Index));
 
             input.options.Clear();
 
@@ -71,20 +75,25 @@ namespace BindingsRx.UI
                 input.options.Add(newOption);
             }
             
-            return new CompositeDisposable(addSubscription, removeSubscription);
+            return new CompositeDisposable(addSubscription, updateSubscription, removeSubscription);
         }
-
+        
         public static IDisposable BindOptionsTo(this Dropdown input, IReactiveCollection<Dropdown.OptionData> options)
         {
             var addSubscription = options.ObserveAdd().Subscribe(x => input.options.Insert(x.Index, x.Value));
             var removeSubscription = options.ObserveRemove().Subscribe(x => input.options.RemoveAt(x.Index));
+            var updateSubscription = options.ObserveReplace().Subscribe(x =>
+            {
+                input.options.RemoveAt(x.Index);
+                input.options.Insert(x.Index, x.NewValue);
+            });
 
             input.options.Clear();
 
             foreach (var option in options)
             { input.options.Add(option); }
 
-            return new CompositeDisposable(addSubscription, removeSubscription);
+            return new CompositeDisposable(addSubscription, updateSubscription, removeSubscription);
         }
     }
 }
