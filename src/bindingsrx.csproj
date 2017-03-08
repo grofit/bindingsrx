@@ -86,6 +86,7 @@
     <Compile Include="Assets\BindingsRx\BindingTypes.cs" />
     <Compile Include="Assets\BindingsRx\Exceptions\SetterNotProvidedException.cs" />
     <Compile Include="Assets\BindingsRx\Generic\GenericBindings.cs" />
+    <Compile Include="Assets\BindingsRx\Transform\TransformExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\CanvasElementExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\InputFieldExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\SliderExtensions.cs" />

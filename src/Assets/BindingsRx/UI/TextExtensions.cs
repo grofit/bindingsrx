@@ -1,24 +1,16 @@
 ﻿using System;
+using BindingsRx.Generic;
 using UniRx;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace BindingsRx.UI
 {
     public static class TextExtensions
     {
-        public static IDisposable BindTextTo(this Text input, IObservable<string> property)
-        {
-            return property.DistinctUntilChanged()
-                .Subscribe(x => input.text = x);
-        }
+        public static IDisposable BindTextTo(this Text input, IReactiveProperty<string> property)
+        { return GenericBindings.ReactivePropertyBinding(() => input.text, x => input.text = x, property, BindingTypes.OneWay); }
 
         public static IDisposable BindTextTo(this Text input, Func<string> getter)
-        {
-            return Observable.EveryUpdate()
-                .Select(x => getter())
-                .DistinctUntilChanged()
-                .Subscribe(x => input.text = x);
-        }
+        { return GenericBindings.PropertyBinding(() => input.text, x => input.text = x, getter, null, BindingTypes.OneWay); }
     }
 }
