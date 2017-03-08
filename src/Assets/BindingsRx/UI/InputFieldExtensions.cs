@@ -7,7 +7,7 @@ namespace BindingsRx.UI
 {
     public static class InputFieldExtensions
     {
-        public static IDisposable BindTextTo(this InputField input, IReactiveProperty<string> property, BindingTypes bindingTypes = BindingTypes.Default)
+        public static IDisposable BindValueTo(this InputField input, IReactiveProperty<string> property, BindingTypes bindingTypes = BindingTypes.Default)
         {
             var propertyBinding = property.DistinctUntilChanged()
                 .Subscribe(x => input.text = x);
@@ -22,7 +22,7 @@ namespace BindingsRx.UI
             return new CompositeDisposable(inputBinding, propertyBinding);
         }
 
-        public static IDisposable BindTextTo(this InputField input, Func<string> getter, Action<string> setter, BindingTypes bindingTypes = BindingTypes.Default)
+        public static IDisposable BindValueTo(this InputField input, Func<string> getter, Action<string> setter, BindingTypes bindingTypes = BindingTypes.Default)
         {
             var propertyBinding = Observable.EveryUpdate()
                 .Select(x => getter())
