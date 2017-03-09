@@ -1,6 +1,5 @@
-﻿using System.Threading;
+﻿using BindingsRx;
 using BindingsRx.Generic;
-using BindingsRx.UI;
 using NUnit.Framework;
 using UniRx;
 
@@ -14,7 +13,7 @@ namespace Editor.Tests
         {
             var reactiveProperty = new ReactiveProperty<string>("");
             var somePretendInput = new ReactiveProperty<string>("some value");
-            GenericBindings.ReactivePropertyBinding(() => somePretendInput, x => somePretendInput.Value = x, reactiveProperty);
+            GenericBindings.Bind(() => somePretendInput, x => somePretendInput.Value = x, reactiveProperty);
 
             reactiveProperty.Value = "first";
             Assert.That(somePretendInput.Value, Is.EqualTo("first"));
@@ -28,7 +27,7 @@ namespace Editor.Tests
         {
             var basicProperty = "";
             var somePretendInput = new ReactiveProperty<string>("some value");
-            GenericBindings.PropertyBinding(() => somePretendInput, x => somePretendInput.Value = x, () => basicProperty, x => basicProperty = x );
+            GenericBindings.Bind(() => somePretendInput, x => somePretendInput.Value = x, () => basicProperty, x => basicProperty = x );
 
             basicProperty = "first";
             Assert.That(somePretendInput.Value, Is.EqualTo("first"));
@@ -42,7 +41,7 @@ namespace Editor.Tests
         {
             var reactiveProperty = new ReactiveProperty<string>("");
             var somePretendInput = new ReactiveProperty<string>("some value");
-            GenericBindings.ReactivePropertyBinding(() => somePretendInput, x => somePretendInput.Value = x, reactiveProperty, BindingTypes.OneWay);
+            GenericBindings.Bind(() => somePretendInput, x => somePretendInput.Value = x, reactiveProperty, BindingTypes.OneWay);
 
             reactiveProperty.Value = "first";
             Assert.That(somePretendInput.Value, Is.EqualTo("first"));

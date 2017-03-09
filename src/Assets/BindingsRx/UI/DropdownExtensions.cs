@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using BindingsRx.Extensions;
+using BindingsRx.Filters;
 using BindingsRx.Generic;
 using UniRx;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace BindingsRx.UI
 {
     public static class DropdownExtensions
     {
-        public static IDisposable BindValueTo(this Dropdown input, IReactiveProperty<int> property, BindingTypes bindingType = BindingTypes.Default)
-        { return GenericBindings.ReactivePropertyBinding(() => input.value, x => input.value = x, property, bindingType); }
+        public static IDisposable BindValueTo(this Dropdown input, IReactiveProperty<int> property, BindingTypes bindingType = BindingTypes.Default, params IFilter<int>[] filters)
+        { return GenericBindings.Bind(() => input.value, x => input.value = x, property, bindingType, filters); }
 
-        public static IDisposable BindValueTo(this Dropdown input, Func<int> getter, Action<int> setter, BindingTypes bindingType = BindingTypes.Default)
-        { return GenericBindings.PropertyBinding(() => input.value, x => input.value = x, getter, setter, bindingType); }
+        public static IDisposable BindValueTo(this Dropdown input, Func<int> getter, Action<int> setter, BindingTypes bindingType = BindingTypes.Default, params IFilter<int>[] filters)
+        { return GenericBindings.Bind(() => input.value, x => input.value = x, getter, setter, bindingType, filters); }
 
-        public static IDisposable BindValueTo(this Dropdown input, IReactiveProperty<string> property, BindingTypes bindingType = BindingTypes.Default)
+        public static IDisposable BindValueTo(this Dropdown input, IReactiveProperty<string> property, BindingTypes bindingType = BindingTypes.Default, params IFilter<string>[] filters)
         {
-            return GenericBindings.ReactivePropertyBinding(() => input.options[input.value].text, x =>
+            return GenericBindings.Bind(() => input.options[input.value].text, x =>
             {
                 var matchingIndex = 0;
                 for (var i = 0; i < input.options.Count; i++)
@@ -30,12 +33,12 @@ namespace BindingsRx.UI
                     }
                 }
                 input.value = matchingIndex;
-            }, property, bindingType);
+            }, property, bindingType, filters);
         }
 
-        public static IDisposable BindValueTo(this Dropdown input, Func<string> getter, Action<string> setter, BindingTypes bindingType = BindingTypes.Default)
+        public static IDisposable BindValueTo(this Dropdown input, Func<string> getter, Action<string> setter, BindingTypes bindingType = BindingTypes.Default, params IFilter<string>[] filters)
         {
-            return GenericBindings.PropertyBinding(() => input.options[input.value].text, x =>
+            return GenericBindings.Bind(() => input.options[input.value].text, x =>
             {
                 var matchingIndex = 0;
                 var currentValue = getter();
@@ -48,7 +51,7 @@ namespace BindingsRx.UI
                     }
                 }
                 input.value = matchingIndex;
-            }, getter, setter, bindingType);
+            }, getter, setter, bindingType, filters);
         }
 
         public static IDisposable BindOptionsTo(this Dropdown input, IReactiveCollection<string> options)
