@@ -10,8 +10,8 @@ namespace Examples.InputBindings
     /// </summary>
     public class SetupDropdownBinding : MonoBehaviour
     {
-        public Dropdown DropdownOutput;
-        public InputField DropdownValueInput;
+        public Dropdown DropdownElement;
+        public InputField ValueInputElement;
 
         void Start()
         {
@@ -19,8 +19,8 @@ namespace Examples.InputBindings
             exampleOptions.Add("Option 1");
             exampleOptions.Add("Option 2");
             exampleOptions.Add("Some Other Option");
-            DropdownOutput.BindOptionsTo(exampleOptions);
-            DropdownOutput.BindValueTo(() => DropdownValueInput.text, x => DropdownValueInput.text = x);
+            DropdownElement.BindOptionsTo(exampleOptions);
+            DropdownElement.BindValueTo(() => ValueInputElement.text, x => ValueInputElement.text = x);
         }
     }
 }

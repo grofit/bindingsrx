@@ -10,6 +10,7 @@ Currently there is support for built in bindings on:
 - Text
 - Slider
 - Dropdown
+- Toggle
 - RectTransform
 - ICanvasElement implementations
 
