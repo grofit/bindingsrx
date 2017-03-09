@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace Examples.InputBindings
 {
+    /// <summary>
+    /// An example of how to bind a reactive collection to dropdown's options as well as value
+    /// </summary>
     public class SetupDropdownBinding : MonoBehaviour
     {
         public Dropdown DropdownOutput;
@@ -17,7 +20,7 @@ namespace Examples.InputBindings
             exampleOptions.Add("Option 2");
             exampleOptions.Add("Some Other Option");
             DropdownOutput.BindOptionsTo(exampleOptions);
-            DropdownOutput.BindValueTo(() => DropdownValueInput.text, x => DropdownValueInput.text = x).AddTo(DropdownOutput);
+            DropdownOutput.BindValueTo(() => DropdownValueInput.text, x => DropdownValueInput.text = x);
         }
     }
 }

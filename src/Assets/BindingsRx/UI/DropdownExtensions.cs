@@ -98,5 +98,66 @@ namespace BindingsRx.UI
 
             return new CompositeDisposable(addSubscription, updateSubscription, removeSubscription).AddTo(input);
         }
+
+        public static IDisposable BindOptionsTo<T>(this Dropdown input, IReactiveCollection<T> options, Func<T, string> textLocator, Func<T, Sprite> spriteLocator = null)
+        {
+            var addSubscription = options.ObserveAdd().Subscribe(x =>
+            {
+                var newOption = new Dropdown.OptionData { text = textLocator(x.Value) };
+                if(spriteLocator != null)
+                { newOption.image = spriteLocator(x.Value); }
+
+                input.options.Insert(x.Index, newOption);
+            });
+
+            var updateSubscription = options.ObserveReplace().Subscribe(x =>
+            {
+                var existingOption = input.options[x.Index];
+                existingOption.text = textLocator(x.NewValue);
+
+                if (spriteLocator != null)
+                { existingOption.image = spriteLocator(x.NewValue); }
+            });
+
+            var removeSubscription = options.ObserveRemove().Subscribe(x => input.options.RemoveAt(x.Index));
+
+            input.options.Clear();
+
+            foreach (var option in options)
+            {
+                var newOption = new Dropdown.OptionData { text = textLocator(option) };
+
+                if (spriteLocator != null)
+                { newOption.image = spriteLocator(option); }
+
+                input.options.Add(newOption);
+            }
+
+            return new CompositeDisposable(addSubscription, updateSubscription, removeSubscription).AddTo(input);
+        }
+
+        /// <summary>
+        /// This is a best guess attempt for users but it is not fast and does not pick up on entries changing, just the count changing
+        /// </summary>
+        public static IDisposable BindOptionsTo<T>(this Dropdown input, ICollection<T> options, Func<T, string> textLocator, Func<T, Sprite> spriteLocator = null)
+        {
+            var lastCount = options.Count;
+
+            return Observable.EveryUpdate()
+                .TakeWhile(x => lastCount != options.Count)
+                .Subscribe(x =>
+                {
+                    input.options.Clear();
+                    foreach (var option in options)
+                    {
+                        var newOption = new Dropdown.OptionData { text = textLocator(option) };
+
+                        if (spriteLocator != null)
+                        { newOption.image = spriteLocator(option); }
+
+                        input.options.Add(newOption);
+                    }
+                }).AddTo(input);
+        }
     }
 }

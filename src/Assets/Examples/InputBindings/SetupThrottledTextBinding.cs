@@ -21,11 +21,10 @@ namespace Examples.InputBindings
         void Start()
         {
             var dynamicSampleFilter = new DynamicSampleFilter<string>(TimeSpan.FromMilliseconds(500)).AddTo(TextBindingOutput);
-            TextBindingOutput.BindTextTo(() => TextBindingInput.text, dynamicSampleFilter).AddTo(TextBindingOutput);
+            TextBindingOutput.BindTextTo(() => TextBindingInput.text, dynamicSampleFilter);
 
-            ThrottleTextBindingInput.BindTextTo(() => dynamicSampleFilter.SampleRate.Value.TotalMilliseconds.ToString(), 
-               UpdateThrottleValue(dynamicSampleFilter))
-               .AddTo(ThrottleTextBindingInput);
+            ThrottleTextBindingInput.BindTextTo(() => dynamicSampleFilter.SampleRate.Value.TotalMilliseconds.ToString(),
+                UpdateThrottleValue(dynamicSampleFilter));
         }
 
         private static Action<string> UpdateThrottleValue(DynamicSampleFilter<string> sampleFilter)
