@@ -13,7 +13,7 @@ myInputField.BindTextTo(someReactiveProperty);
 
 ## Dependencies
 
-- UniRx
+- [UniRx](https://github.com/neuecc/UniRx) 
 
 ## Features
 
@@ -74,3 +74,7 @@ There are also a suite of tests which are being expanded as the project grows.
 ## Docs
 
 See the docs folder for more information. (This will grow)
+
+## Other Blurbs
+
+If you like design patterns and practices then there is also a ECS framework built on unirx which can be found @ [grofit/ecsrx](https://github.com/grofit/ecsrx).
