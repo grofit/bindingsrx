@@ -62,20 +62,18 @@ As seen here we can tell it that we explicitly only want one way binding and we 
 
 ## Cleaning Up
 
-So currently we have created bindings however almost everything in the rx world requires disposing once its dealt with, so in most cases you would want to use the `AddTo` extension to clean up with the binding, so for example to clean up our previous example you would do:
+So currently we have created bindings however almost everything in the rx world requires disposing once its dealt with, so for all unity based objects the binding will be bound to the lifetime of the object you are invoking on and be disposed of internally.
 
-```csharp
-var myProperty = "hello"; 
-var myInputField = GetComponent<InputField>();
-myInputField.BindTextTo(() => myProperty, null, BindingTypes.OneWay)
-    .AddTo(myInputField);
-```
+So for example if you were to be using an `InputField` and using a `BindTextTo` binding, it would automatically clean up the binding with the `InputField` which is handled inside the extension method in most cases.
 
-This now tells the binding that has been created that it should dispose itself when `myInputField` is disposed. In `ReactiveProperty` examples you may want to change it to factor in both parties:
+### Additional Cleanup
+so in most cases you would want to cleanup with the unity object, which is fine, however if you need to clean up with something else, such as a `ReactiveProperty` or some other object you may need to use the `AddTo` extension to clean up with the binding, so for example to clean up our previous example you would do:
 
 ```csharp
 var myReactiveProperty = new ReactiveProperty<string>("hello"); 
 var myInputField = GetComponent<InputField>();
 myInputField.BindTextTo(myReactiveProperty)
-    .AddTo(myInputField).AddTo(myReactiveProperty);
+.AddTo(myReactiveProperty);
 ```
+
+Which would also dispose with the `ReactiveProperty` if that was disposed before the input, but in most cases you would not have to worry too much about explicitly tidying up.

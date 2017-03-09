@@ -14,10 +14,10 @@ namespace BindingsRx.UI
     public static class DropdownExtensions
     {
         public static IDisposable BindValueTo(this Dropdown input, IReactiveProperty<int> property, BindingTypes bindingType = BindingTypes.Default, params IFilter<int>[] filters)
-        { return GenericBindings.Bind(() => input.value, x => input.value = x, property, bindingType, filters); }
+        { return GenericBindings.Bind(() => input.value, x => input.value = x, property, bindingType, filters).AddTo(input); }
 
         public static IDisposable BindValueTo(this Dropdown input, Func<int> getter, Action<int> setter, BindingTypes bindingType = BindingTypes.Default, params IFilter<int>[] filters)
-        { return GenericBindings.Bind(() => input.value, x => input.value = x, getter, setter, bindingType, filters); }
+        { return GenericBindings.Bind(() => input.value, x => input.value = x, getter, setter, bindingType, filters).AddTo(input); }
 
         public static IDisposable BindValueTo(this Dropdown input, IReactiveProperty<string> property, BindingTypes bindingType = BindingTypes.Default, params IFilter<string>[] filters)
         {
@@ -33,7 +33,7 @@ namespace BindingsRx.UI
                     }
                 }
                 input.value = matchingIndex;
-            }, property, bindingType, filters);
+            }, property, bindingType, filters).AddTo(input);
         }
 
         public static IDisposable BindValueTo(this Dropdown input, Func<string> getter, Action<string> setter, BindingTypes bindingType = BindingTypes.Default, params IFilter<string>[] filters)
@@ -51,7 +51,7 @@ namespace BindingsRx.UI
                     }
                 }
                 input.value = matchingIndex;
-            }, getter, setter, bindingType, filters);
+            }, getter, setter, bindingType, filters).AddTo(input);
         }
 
         public static IDisposable BindOptionsTo(this Dropdown input, IReactiveCollection<string> options)
@@ -78,7 +78,7 @@ namespace BindingsRx.UI
                 input.options.Add(newOption);
             }
             
-            return new CompositeDisposable(addSubscription, updateSubscription, removeSubscription);
+            return new CompositeDisposable(addSubscription, updateSubscription, removeSubscription).AddTo(input);
         }
         
         public static IDisposable BindOptionsTo(this Dropdown input, IReactiveCollection<Dropdown.OptionData> options)
@@ -96,7 +96,7 @@ namespace BindingsRx.UI
             foreach (var option in options)
             { input.options.Add(option); }
 
-            return new CompositeDisposable(addSubscription, updateSubscription, removeSubscription);
+            return new CompositeDisposable(addSubscription, updateSubscription, removeSubscription).AddTo(input);
         }
     }
 }
