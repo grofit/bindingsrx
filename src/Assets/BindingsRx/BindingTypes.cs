@@ -1,4 +1,4 @@
-﻿namespace BindingsRx.UI
+﻿namespace BindingsRx
 {
     public enum BindingTypes
     {
