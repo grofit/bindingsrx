@@ -1,11 +1,9 @@
 ﻿using System;
-using BindingsRx.Exceptions;
 using BindingsRx.Filters;
-using BindingsRx.Generic;
 using UniRx;
 using UnityEngine.UI;
 
-namespace BindingsRx.UI
+namespace BindingsRx.Bindings
 {
     public static class SliderExtensions
     {

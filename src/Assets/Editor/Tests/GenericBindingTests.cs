@@ -1,5 +1,5 @@
 ﻿using BindingsRx;
-using BindingsRx.Generic;
+using BindingsRx.Bindings;
 using NUnit.Framework;
 using UniRx;
 

@@ -1,11 +1,9 @@
 ﻿using System;
 using BindingsRx.Filters;
-using BindingsRx.Generic;
-using BindingsRx.UI;
 using UniRx;
 using UnityEngine;
 
-namespace BindingsRx.GameObjects
+namespace BindingsRx.Bindings
 {
     public static class TransformExtensions
     {

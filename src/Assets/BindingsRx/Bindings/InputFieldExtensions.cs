@@ -1,12 +1,11 @@
 ﻿using System;
 using BindingsRx.Convertors;
 using BindingsRx.Filters;
-using BindingsRx.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BindingsRx.UI
+namespace BindingsRx.Bindings
 {
     public static class InputFieldExtensions
     {

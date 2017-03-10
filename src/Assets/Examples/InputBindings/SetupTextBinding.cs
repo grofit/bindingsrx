@@ -1,4 +1,4 @@
-﻿using BindingsRx.UI;
+﻿using BindingsRx.Bindings;
 using UnityEngine;
 using UnityEngine.UI;
 

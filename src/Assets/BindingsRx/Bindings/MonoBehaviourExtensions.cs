@@ -1,10 +1,9 @@
 using System;
 using BindingsRx.Filters;
-using BindingsRx.Generic;
 using UniRx;
 using UnityEngine;
 
-namespace BindingsRx.GameObjects
+namespace BindingsRx.Bindings
 {
     public static class MonoBehaviourExtensions
     {

@@ -1,6 +1,6 @@
 ﻿using System;
+using BindingsRx.Bindings;
 using BindingsRx.Filters;
-using BindingsRx.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;

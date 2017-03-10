@@ -83,6 +83,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BindingsRx\Bindings\MaterialExtensions.cs" />
     <Compile Include="Assets\BindingsRx\BindingTypes.cs" />
     <Compile Include="Assets\BindingsRx\Convertors\IConvertor.cs" />
     <Compile Include="Assets\BindingsRx\Convertors\IntConvertor.cs" />
@@ -94,19 +95,19 @@
     <Compile Include="Assets\BindingsRx\Filters\DynamicSampleFilter.cs" />
     <Compile Include="Assets\BindingsRx\Filters\IFilter.cs" />
     <Compile Include="Assets\BindingsRx\Filters\SampleFilter.cs" />
-    <Compile Include="Assets\BindingsRx\GameObjects\GameObjectExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\GameObjects\MonoBehaviourExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\GameObjects\RectTransformExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\GameObjects\TransformExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\Generic\GenericBindings.cs" />
-    <Compile Include="Assets\BindingsRx\UI\CanvasElementExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\UI\DropdownExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\UI\InputFieldExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\UI\ScrollBarExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\UI\ScrollRectExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\UI\SliderExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\UI\TextExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\UI\ToggleExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\GameObjectExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\MonoBehaviourExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\RectTransformExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\TransformExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\GenericBindings.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\CanvasElementExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\DropdownExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\InputFieldExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\ScrollBarExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\ScrollRectExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\SliderExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\TextExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\ToggleExtensions.cs" />
     <Compile Include="Assets\Examples\InputBindings\SetupDropdownBinding.cs" />
     <Compile Include="Assets\Examples\InputBindings\SetupTextBinding.cs" />
     <Compile Include="Assets\Examples\InputBindings\SetupTextualValueBinding.cs" />

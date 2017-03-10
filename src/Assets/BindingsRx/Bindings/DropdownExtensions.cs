@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using BindingsRx.Extensions;
 using BindingsRx.Filters;
-using BindingsRx.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BindingsRx.UI
+namespace BindingsRx.Bindings
 {
     public static class DropdownExtensions
     {

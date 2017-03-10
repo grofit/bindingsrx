@@ -1,12 +1,10 @@
 ﻿using System;
 using BindingsRx.Filters;
-using BindingsRx.GameObjects;
-using BindingsRx.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BindingsRx.UI
+namespace BindingsRx.Bindings
 {
     public static class CanvasElementExtensions
     {

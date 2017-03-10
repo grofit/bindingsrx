@@ -1,5 +1,5 @@
 ﻿using System;
-using BindingsRx.UI;
+using BindingsRx.Bindings;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;

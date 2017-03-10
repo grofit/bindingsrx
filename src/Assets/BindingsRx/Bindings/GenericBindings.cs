@@ -4,9 +4,8 @@ using BindingsRx.Exceptions;
 using BindingsRx.Extensions;
 using BindingsRx.Filters;
 using UniRx;
-using UnityEngine;
 
-namespace BindingsRx.Generic
+namespace BindingsRx.Bindings
 {
     public static class GenericBindings
     {
