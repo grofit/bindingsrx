@@ -14,16 +14,16 @@ namespace Examples.InputBindings
     /// </summary>
     public class SetupThrottledTextBinding : MonoBehaviour
     {
-        public InputField TextBindingInput;
-        public InputField ThrottleTextBindingInput;
-        public Text TextBindingOutput;
+        public InputField InputElement;
+        public InputField ThrottleInputElement;
+        public Text TextElement;
 
         void Start()
         {
-            var dynamicSampleFilter = new DynamicSampleFilter<string>(TimeSpan.FromMilliseconds(500)).AddTo(TextBindingOutput);
-            TextBindingOutput.BindTextTo(() => TextBindingInput.text, dynamicSampleFilter);
+            var dynamicSampleFilter = new DynamicSampleFilter<string>(TimeSpan.FromMilliseconds(500)).AddTo(TextElement);
+            TextElement.BindTextTo(() => InputElement.text, dynamicSampleFilter);
 
-            ThrottleTextBindingInput.BindTextTo(() => dynamicSampleFilter.SampleRate.Value.TotalMilliseconds.ToString(),
+            ThrottleInputElement.BindTextTo(() => dynamicSampleFilter.SampleRate.Value.TotalMilliseconds.ToString(),
                 UpdateThrottleValue(dynamicSampleFilter));
         }
 

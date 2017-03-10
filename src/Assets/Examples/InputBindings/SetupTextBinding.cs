@@ -1,5 +1,4 @@
 ﻿using BindingsRx.UI;
-using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +9,12 @@ namespace Examples.InputBindings
     /// </summary>
     public class SetupTextBinding : MonoBehaviour
     {
-        public InputField TextBindingInput;
-        public Text TextBindingOutput;
-    
-        void Start ()
+        public InputField InputElement;
+        public Text TextElement;
+
+        void Start()
         {
-            TextBindingOutput.BindTextTo(() => TextBindingInput.text);
+            TextElement.BindTextTo(() => InputElement.text);
         }
     }
 }

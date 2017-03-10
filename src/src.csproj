@@ -84,24 +84,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\BindingsRx\BindingTypes.cs" />
+    <Compile Include="Assets\BindingsRx\Convertors\IConvertor.cs" />
+    <Compile Include="Assets\BindingsRx\Convertors\IntConvertor.cs" />
+    <Compile Include="Assets\BindingsRx\Convertors\TextToDoubleConvertor.cs" />
+    <Compile Include="Assets\BindingsRx\Convertors\TextToFloatConvertor.cs" />
     <Compile Include="Assets\BindingsRx\Exceptions\SetterNotProvidedException.cs" />
     <Compile Include="Assets\BindingsRx\Extensions\IObservableExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Extensions\IReactivePropertyExtensions.cs" />
     <Compile Include="Assets\BindingsRx\Filters\DynamicSampleFilter.cs" />
     <Compile Include="Assets\BindingsRx\Filters\IFilter.cs" />
     <Compile Include="Assets\BindingsRx\Filters\SampleFilter.cs" />
     <Compile Include="Assets\BindingsRx\GameObjects\GameObjectExtensions.cs" />
-    <Compile Include="Assets\BindingsRx\GameObjects\MonobehaviourExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\GameObjects\MonoBehaviourExtensions.cs" />
     <Compile Include="Assets\BindingsRx\GameObjects\RectTransformExtensions.cs" />
     <Compile Include="Assets\BindingsRx\GameObjects\TransformExtensions.cs" />
     <Compile Include="Assets\BindingsRx\Generic\GenericBindings.cs" />
     <Compile Include="Assets\BindingsRx\UI\CanvasElementExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\DropdownExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\InputFieldExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\UI\ScrollBarExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\UI\ScrollRectExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\SliderExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\TextExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\UI\ToggleExtensions.cs" />
     <Compile Include="Assets\Examples\InputBindings\SetupDropdownBinding.cs" />
     <Compile Include="Assets\Examples\InputBindings\SetupTextBinding.cs" />
+    <Compile Include="Assets\Examples\InputBindings\SetupTextualValueBinding.cs" />
     <Compile Include="Assets\Examples\InputBindings\SetupThrottledTextBinding.cs" />
+    <Compile Include="Assets\Examples\InputBindings\SetupToggleBinding.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
