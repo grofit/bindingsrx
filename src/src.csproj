@@ -103,6 +103,7 @@
     <Compile Include="Assets\BindingsRx\UI\DropdownExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\InputFieldExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\ScrollBarExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\UI\ScrollRectExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\SliderExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\TextExtensions.cs" />
     <Compile Include="Assets\BindingsRx\UI\ToggleExtensions.cs" />
