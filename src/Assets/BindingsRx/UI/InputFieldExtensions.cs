@@ -32,15 +32,9 @@ namespace BindingsRx.UI
         { return GenericBindings.Bind(() => input.caretColor, x => input.caretColor = x, getter, setter, bindingType, filters).AddTo(input); }
 
         public static IDisposable BindColorTo(this InputField input, IReactiveProperty<Color> property, BindingTypes bindingType = BindingTypes.Default, params IFilter<Color>[] filters)
-        {
-            var textChild = input.GetComponentInChildren<Text>();
-            return textChild.BindColorTo(property, bindingType, filters).AddTo(input);
-        }
+        { return input.textComponent.BindColorTo(property, bindingType, filters).AddTo(input); }
 
         public static IDisposable BindColorTo(this InputField input, Func<Color> getter, Action<Color> setter, BindingTypes bindingType = BindingTypes.Default, params IFilter<Color>[] filters)
-        {
-            var textChild = input.GetComponentInChildren<Text>();
-            return textChild.BindColorTo(getter, setter, bindingType, filters).AddTo(input);
-        }
+        { return input.textComponent.BindColorTo(getter, setter, bindingType, filters).AddTo(input); }
     }
 }
