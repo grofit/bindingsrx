@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Assets\BindingsRx\Bindings\AnimatorExtensions.cs" />
     <Compile Include="Assets\BindingsRx\Bindings\MaterialExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Bindings\ParticleSystemExtensions.cs" />
     <Compile Include="Assets\BindingsRx\BindingTypes.cs" />
     <Compile Include="Assets\BindingsRx\Convertors\IConvertor.cs" />
     <Compile Include="Assets\BindingsRx\Convertors\IntConvertor.cs" />
