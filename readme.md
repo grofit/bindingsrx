@@ -1,8 +1,8 @@
 # BindingsRx
 
-[![Join the chat at https://gitter.im/grofit/ecsrx](https://badges.gitter.im/grofit/ecsrx.svg)](https://gitter.im/grofit/ecsrx?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 BindingsRx is a one or two way binding system for unity using unirx.
+
+[![Gitter](https://badges.gitter.im/grofit/bindingsrx.svg)](https://gitter.im/grofit/bindingsrx?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 It allows you to write more succinct code while showing intent for properties which are bound to other properties, and looks something like this:
 
