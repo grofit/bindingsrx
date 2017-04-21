@@ -3,17 +3,18 @@ using BindingsRx.Convertors;
 using BindingsRx.Exceptions;
 using BindingsRx.Extensions;
 using BindingsRx.Filters;
+using BindingsRx.Overrides;
 using UniRx;
 
 namespace BindingsRx.Bindings
 {
     public static class GenericBindings
     {
-        public static IDisposable Bind<T>(IReactiveProperty<T> propertyA , IReactiveProperty<T> propertyB, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T>[] filters)
+        public static IDisposable Bind<T>(IReactiveProperty<T> propertyA, IReactiveProperty<T> propertyB, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T>[] filters)
         {
             var propertyBBinding = propertyB
                 .ApplyInputFilters(filters)
-                .DistinctUntilChanged()
+                .DistinctUntilChanged(x => !x.Equals(propertyA.Value))
                 .Subscribe(x => propertyA.Value = x);
 
             if (bindingTypes == BindingTypes.OneWay)
@@ -21,17 +22,17 @@ namespace BindingsRx.Bindings
 
             var propertyABinding = propertyA
                 .ApplyOutputFilters(filters)
-                .DistinctUntilChanged()
+                .DistinctUntilChanged(x => !x.Equals(propertyB.Value))
                 .Subscribe(x => propertyB.Value = x);
 
             return new CompositeDisposable(propertyABinding, propertyBBinding);
         }
-        
+
         public static IDisposable Bind<T>(Func<T> propertyAGetter, Action<T> propertyASetter, IReactiveProperty<T> propertyB, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T>[] filters)
         {
             var propertyBBinding = propertyB
                 .ApplyInputFilters(filters)
-                .DistinctUntilChanged()
+                .DistinctUntilChanged(x => !x.Equals(propertyAGetter()))
                 .Subscribe(propertyASetter);
 
             if (bindingTypes == BindingTypes.OneWay)
@@ -40,7 +41,7 @@ namespace BindingsRx.Bindings
             var propertyABinding = Observable.EveryUpdate()
                 .Select(x => propertyAGetter())
                 .ApplyOutputFilters(filters)
-                .DistinctUntilChanged()
+                .DistinctUntilChanged(x => !x.Equals(propertyB.Value))
                 .Subscribe(x => propertyB.Value = propertyAGetter());
 
             return new CompositeDisposable(propertyABinding, propertyBBinding);
@@ -51,7 +52,7 @@ namespace BindingsRx.Bindings
             var propertyBBinding = Observable.EveryUpdate()
                 .Select(x => propertyBGetter())
                 .ApplyInputFilters(filters)
-                .DistinctUntilChanged()
+                .DistinctUntilChanged(x => !x.Equals(propertyAGetter()))
                 .Subscribe(propertyASetter);
 
             if (bindingTypes == BindingTypes.OneWay)
@@ -63,7 +64,7 @@ namespace BindingsRx.Bindings
             var propertyABinding = Observable.EveryUpdate()
                 .Select(x => propertyAGetter())
                 .ApplyOutputFilters(filters)
-                .DistinctUntilChanged()
+                .DistinctUntilChanged(x => !x.Equals(propertyBGetter()))
                 .Subscribe(propertyBSetter);
 
             return new CompositeDisposable(propertyABinding, propertyBBinding);
@@ -74,7 +75,7 @@ namespace BindingsRx.Bindings
             var propertyBBinding = propertyB
                 .Select(convertor.From)
                 .ApplyInputFilters(filters)
-                .DistinctUntilChanged()
+                .DistinctUntilChanged(x => !x.Equals(propertyA.Value))
                 .Subscribe(x => propertyA.Value = x);
 
             if (bindingTypes == BindingTypes.OneWay)
@@ -84,6 +85,7 @@ namespace BindingsRx.Bindings
                 .ApplyOutputFilters(filters)
                 .DistinctUntilChanged()
                 .Select(convertor.From)
+                .Where(x => !x.Equals(propertyB.Value))
                 .Subscribe(x => propertyB.Value = x);
 
             return new CompositeDisposable(propertyABinding, propertyBBinding);
@@ -94,7 +96,7 @@ namespace BindingsRx.Bindings
             var propertyBBinding = propertyB
                 .Select(convertor.From)
                 .ApplyInputFilters(filters)
-                .DistinctUntilChanged()
+                .DistinctUntilChanged(x => !x.Equals(propertyAGetter()))
                 .Subscribe(propertyASetter);
 
             if (bindingTypes == BindingTypes.OneWay)
@@ -104,7 +106,9 @@ namespace BindingsRx.Bindings
                 .Select(x => propertyAGetter())
                 .ApplyOutputFilters(filters)
                 .DistinctUntilChanged()
-                .Subscribe(x => propertyB.Value = convertor.From(propertyAGetter()));
+                .Select(convertor.From)
+                .Where(x => !x.Equals(propertyB.Value))
+                .Subscribe(x => propertyB.Value = x);
 
             return new CompositeDisposable(propertyABinding, propertyBBinding);
         }
@@ -114,7 +118,7 @@ namespace BindingsRx.Bindings
             var propertyBBinding = Observable.EveryUpdate()
                 .Select(x => convertor.From(propertyBGetter()))
                 .ApplyInputFilters(filters)
-                .DistinctUntilChanged()
+                .DistinctUntilChanged(x => !x.Equals(propertyAGetter()))
                 .Subscribe(propertyASetter);
 
             if (bindingTypes == BindingTypes.OneWay)
@@ -128,6 +132,7 @@ namespace BindingsRx.Bindings
                 .ApplyOutputFilters(filters)
                 .DistinctUntilChanged()
                 .Select(convertor.From)
+                .Where(x => !x.Equals(propertyBGetter()))
                 .Subscribe(propertyBSetter);
 
             return new CompositeDisposable(propertyABinding, propertyBBinding);

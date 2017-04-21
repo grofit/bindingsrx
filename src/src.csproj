@@ -110,6 +110,7 @@
     <Compile Include="Assets\BindingsRx\Bindings\SliderExtensions.cs" />
     <Compile Include="Assets\BindingsRx\Bindings\TextExtensions.cs" />
     <Compile Include="Assets\BindingsRx\Bindings\ToggleExtensions.cs" />
+    <Compile Include="Assets\BindingsRx\Overrides\ObservableProxy.cs" />
     <Compile Include="Assets\Examples\InputBindings\SetupDropdownBinding.cs" />
     <Compile Include="Assets\Examples\InputBindings\SetupTextBinding.cs" />
     <Compile Include="Assets\Examples\InputBindings\SetupTextualValueBinding.cs" />
