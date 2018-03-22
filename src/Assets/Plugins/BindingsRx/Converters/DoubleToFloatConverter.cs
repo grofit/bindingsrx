@@ -1,6 +1,6 @@
-﻿namespace BindingsRx.Convertors
+﻿namespace BindingsRx.Converters
 {
-    public class DoubleToFloatConvertor : IConvertor<double, float>, IConvertor<float, double>
+    public class DoubleToFloatConverter : IConverter<double, float>, IConverter<float, double>
     {
         public float From(double value)
         { return (float)value; }

@@ -1,6 +1,6 @@
-﻿namespace BindingsRx.Convertors
+﻿namespace BindingsRx.Converters
 {
-    public class TextToFloatConvertor : IConvertor<string, float>, IConvertor<float, string>
+    public class TextToFloatConverter : IConverter<string, float>, IConverter<float, string>
     {
         public string From(float value)
         { return value.ToString(); }

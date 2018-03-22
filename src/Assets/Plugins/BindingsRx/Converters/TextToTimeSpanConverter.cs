@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace BindingsRx.Convertors
+namespace BindingsRx.Converters
 {
-    public class TextToTimeSpanConvertor : IConvertor<string, TimeSpan>, IConvertor<TimeSpan, string>
+    public class TextToTimeSpanConverter : IConverter<string, TimeSpan>, IConverter<TimeSpan, string>
     {
         public string From(TimeSpan value)
         { return value.ToString(); }

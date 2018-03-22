@@ -1,6 +1,6 @@
-﻿namespace BindingsRx.Convertors
+﻿namespace BindingsRx.Converters
 {
-    public class TextToDoubleConvertor : IConvertor<string, double>, IConvertor<double, string>
+    public class TextToDoubleConverter : IConverter<string, double>, IConverter<double, string>
     {
         public string From(double value)
         { return value.ToString(); }

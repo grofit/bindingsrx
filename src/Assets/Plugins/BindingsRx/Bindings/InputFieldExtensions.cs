@@ -1,5 +1,5 @@
 ﻿using System;
-using BindingsRx.Convertors;
+using BindingsRx.Converters;
 using BindingsRx.Filters;
 using UniRx;
 using UnityEngine;
@@ -13,13 +13,13 @@ namespace BindingsRx.Bindings
         { return GenericBindings.Bind(() => input.text, x => input.text = x, property, bindingType, filters).AddTo(input); }
 
         public static IDisposable BindTextTo(this InputField input, IReactiveProperty<int> property, BindingTypes bindingType = BindingTypes.Default, params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToIntConvertor(), bindingType, filters).AddTo(input); }
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToIntConverter(), bindingType, filters).AddTo(input); }
 
         public static IDisposable BindTextTo(this InputField input, IReactiveProperty<float> property, BindingTypes bindingType = BindingTypes.Default, params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToFloatConvertor(), bindingType, filters).AddTo(input); }
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToFloatConverter(), bindingType, filters).AddTo(input); }
 
         public static IDisposable BindTextTo(this InputField input, IReactiveProperty<double> property, BindingTypes bindingType = BindingTypes.Default, params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToDoubleConvertor(), bindingType, filters).AddTo(input); }
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToDoubleConverter(), bindingType, filters).AddTo(input); }
 
         public static IDisposable BindTextTo(this InputField input, Func<string> getter, Action<string> setter, BindingTypes bindingType = BindingTypes.Default, params IFilter<string>[] filters)
         { return GenericBindings.Bind(() => input.text, x => input.text = x, getter, setter, bindingType, filters).AddTo(input); }

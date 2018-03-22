@@ -1,5 +1,5 @@
 ﻿using System;
-using BindingsRx.Convertors;
+using BindingsRx.Converters;
 using BindingsRx.Filters;
 using UniRx;
 using UnityEngine;
@@ -13,28 +13,28 @@ namespace BindingsRx.Bindings
         { return GenericBindings.Bind(() => input.text, x => input.text = x, property, BindingTypes.OneWay, filters).AddTo(input); }
         
         public static IDisposable BindTextTo(this Text input, IReactiveProperty<int> property, params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToIntConvertor(), BindingTypes.OneWay, filters).AddTo(input); }
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToIntConverter(), BindingTypes.OneWay, filters).AddTo(input); }
 
         public static IDisposable BindTextTo(this Text input, IReactiveProperty<float> property, params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToFloatConvertor(), BindingTypes.OneWay, filters).AddTo(input); }
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToFloatConverter(), BindingTypes.OneWay, filters).AddTo(input); }
 
         public static IDisposable BindTextTo(this Text input, IReactiveProperty<double> property, params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToDoubleConvertor(), BindingTypes.OneWay, filters).AddTo(input); }
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToDoubleConverter(), BindingTypes.OneWay, filters).AddTo(input); }
 
         public static IDisposable BindTextTo(this Text input, IReactiveProperty<DateTime> property, string dateTimeFormat = "d", params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToDateConvertor(dateTimeFormat), BindingTypes.OneWay, filters).AddTo(input); }
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToDateConverter(dateTimeFormat), BindingTypes.OneWay, filters).AddTo(input); }
         
         public static IDisposable BindTextTo(this Text input, IReactiveProperty<TimeSpan> property, params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToTimeSpanConvertor(), BindingTypes.OneWay, filters).AddTo(input); }
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, new TextToTimeSpanConverter(), BindingTypes.OneWay, filters).AddTo(input); }
 
-        public static IDisposable BindTextTo<T>(this Text input, IReactiveProperty<T> property, IConvertor<string, T> convertor, params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, convertor, BindingTypes.OneWay, filters).AddTo(input); }
+        public static IDisposable BindTextTo<T>(this Text input, IReactiveProperty<T> property, IConverter<string, T> converter, params IFilter<string>[] filters)
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, property, converter, BindingTypes.OneWay, filters).AddTo(input); }
 
         public static IDisposable BindTextTo(this Text input, Func<string> getter, params IFilter<string>[] filters)
         { return GenericBindings.Bind(() => input.text, x => input.text = x, getter, null, BindingTypes.OneWay, filters).AddTo(input); }
 
-        public static IDisposable BindTextTo<T>(this Text input, Func<T> getter, IConvertor<string, T> convertor, params IFilter<string>[] filters)
-        { return GenericBindings.Bind(() => input.text, x => input.text = x, getter, null, convertor, BindingTypes.OneWay, filters).AddTo(input); }
+        public static IDisposable BindTextTo<T>(this Text input, Func<T> getter, IConverter<string, T> converter, params IFilter<string>[] filters)
+        { return GenericBindings.Bind(() => input.text, x => input.text = x, getter, null, converter, BindingTypes.OneWay, filters).AddTo(input); }
 
         public static IDisposable BindFontSizeTo(this Text input, IReactiveProperty<int> property, params IFilter<int>[] filters)
         { return GenericBindings.Bind(() => input.fontSize, x => input.fontSize = x, property, BindingTypes.OneWay, filters).AddTo(input); }

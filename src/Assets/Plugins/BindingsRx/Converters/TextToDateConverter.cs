@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace BindingsRx.Convertors
+namespace BindingsRx.Converters
 {
-    public class TextToDateConvertor : IConvertor<string, DateTime>, IConvertor<DateTime, string>
+    public class TextToDateConverter : IConverter<string, DateTime>, IConverter<DateTime, string>
     {
         private string _dateFormat { get; set; }
 
-        public TextToDateConvertor(string dateFormat = "d")
+        public TextToDateConverter(string dateFormat = "d")
         {
             _dateFormat = dateFormat;
         }

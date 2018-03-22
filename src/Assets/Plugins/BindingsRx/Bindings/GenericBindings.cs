@@ -1,5 +1,5 @@
 ﻿using System;
-using BindingsRx.Convertors;
+using BindingsRx.Converters;
 using BindingsRx.Exceptions;
 using BindingsRx.Extensions;
 using BindingsRx.Filters;
@@ -69,10 +69,10 @@ namespace BindingsRx.Bindings
             return new CompositeDisposable(propertyABinding, propertyBBinding);
         }
 
-        public static IDisposable Bind<T1, T2>(IReactiveProperty<T1> propertyA, IReactiveProperty<T2> propertyB, IConvertor<T1, T2> convertor, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T1>[] filters)
+        public static IDisposable Bind<T1, T2>(IReactiveProperty<T1> propertyA, IReactiveProperty<T2> propertyB, IConverter<T1, T2> converter, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T1>[] filters)
         {
             var propertyBBinding = propertyB
-                .Select(convertor.From)
+                .Select(converter.From)
                 .ApplyInputFilters(filters)
                 .DistinctUntilChanged()
                 .Subscribe(x => propertyA.Value = x);
@@ -83,16 +83,16 @@ namespace BindingsRx.Bindings
             var propertyABinding = propertyA
                 .ApplyOutputFilters(filters)
                 .DistinctUntilChanged()
-                .Select(convertor.From)
+                .Select(converter.From)
                 .Subscribe(x => propertyB.Value = x);
 
             return new CompositeDisposable(propertyABinding, propertyBBinding);
         }
 
-        public static IDisposable Bind<T1, T2>(Func<T1> propertyAGetter, Action<T1> propertyASetter, IReactiveProperty<T2> propertyB, IConvertor<T1, T2> convertor, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T1>[] filters)
+        public static IDisposable Bind<T1, T2>(Func<T1> propertyAGetter, Action<T1> propertyASetter, IReactiveProperty<T2> propertyB, IConverter<T1, T2> converter, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T1>[] filters)
         {
             var propertyBBinding = propertyB
-                .Select(convertor.From)
+                .Select(converter.From)
                 .ApplyInputFilters(filters)
                 .DistinctUntilChanged()
                 .Subscribe(propertyASetter);
@@ -104,15 +104,15 @@ namespace BindingsRx.Bindings
                 .Select(x => propertyAGetter())
                 .ApplyOutputFilters(filters)
                 .DistinctUntilChanged()
-                .Subscribe(x => propertyB.Value = convertor.From(propertyAGetter()));
+                .Subscribe(x => propertyB.Value = converter.From(propertyAGetter()));
 
             return new CompositeDisposable(propertyABinding, propertyBBinding);
         }
 
-        public static IDisposable Bind<T1, T2>(Func<T1> propertyAGetter, Action<T1> propertyASetter, Func<T2> propertyBGetter, Action<T2> propertyBSetter, IConvertor<T1, T2> convertor, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T1>[] filters)
+        public static IDisposable Bind<T1, T2>(Func<T1> propertyAGetter, Action<T1> propertyASetter, Func<T2> propertyBGetter, Action<T2> propertyBSetter, IConverter<T1, T2> converter, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T1>[] filters)
         {
             var propertyBBinding = Observable.EveryUpdate()
-                .Select(x => convertor.From(propertyBGetter()))
+                .Select(x => converter.From(propertyBGetter()))
                 .ApplyInputFilters(filters)
                 .DistinctUntilChanged()
                 .Subscribe(propertyASetter);
@@ -127,7 +127,7 @@ namespace BindingsRx.Bindings
                 .Select(x => propertyAGetter())
                 .ApplyOutputFilters(filters)
                 .DistinctUntilChanged()
-                .Select(convertor.From)
+                .Select(converter.From)
                 .Subscribe(propertyBSetter);
 
             return new CompositeDisposable(propertyABinding, propertyBBinding);
