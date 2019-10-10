@@ -27,6 +27,14 @@ namespace BindingsRx.Bindings
             return new CompositeDisposable(propertyABinding, propertyBBinding);
         }
         
+        public static IDisposable Bind<T>(IReactiveProperty<T> propertyA , IReadOnlyReactiveProperty<T> propertyB, params IFilter<T>[] filters)
+        {
+            return propertyB
+                .ApplyInputFilters(filters)
+                .DistinctUntilChanged()
+                .Subscribe(x => propertyA.Value = x);
+        }
+        
         public static IDisposable Bind<T>(Func<T> propertyAGetter, Action<T> propertyASetter, IReactiveProperty<T> propertyB, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T>[] filters)
         {
             var propertyBBinding = propertyB
@@ -46,6 +54,14 @@ namespace BindingsRx.Bindings
             return new CompositeDisposable(propertyABinding, propertyBBinding);
         }
 
+        public static IDisposable Bind<T>(Action<T> propertyASetter, IReadOnlyReactiveProperty<T> propertyB, params IFilter<T>[] filters)
+        {
+            return propertyB
+                .ApplyInputFilters(filters)
+                .DistinctUntilChanged()
+                .Subscribe(propertyASetter);
+        }
+        
         public static IDisposable Bind<T>(Func<T> propertyAGetter, Action<T> propertyASetter, Func<T> propertyBGetter, Action<T> propertyBSetter, BindingTypes bindingTypes = BindingTypes.Default, params IFilter<T>[] filters)
         {
             var propertyBBinding = Observable.EveryUpdate()

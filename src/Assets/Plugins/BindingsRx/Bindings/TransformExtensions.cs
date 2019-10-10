@@ -24,5 +24,14 @@ namespace BindingsRx.Bindings
 
         public static IDisposable BindScaleTo(this Transform input, Func<Vector3> getter, Action<Vector3> setter, BindingTypes bindingType = BindingTypes.Default, params IFilter<Vector3>[] filters)
         { return GenericBindings.Bind(() => input.localScale, x => input.transform.localScale = x, getter, setter, bindingType, filters).AddTo(input); }
+        
+        public static void DeleteAllChildren(this Transform transform)
+        {
+            for (var i = transform.childCount - 1; i >= 0; i--)
+            {
+                var child = transform.GetChild(i);
+                GameObject.Destroy(child.gameObject);
+            }
+        }
     }
 }

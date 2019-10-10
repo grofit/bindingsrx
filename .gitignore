@@ -8,3 +8,9 @@ Temp
 /src/src.userprefs
 /*.unitypackage
 src/\.vs/
+
+dist/
+
+src/.idea/
+
+src/Logs/

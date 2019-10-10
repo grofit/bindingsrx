@@ -19,7 +19,7 @@ namespace Examples.InputBindings
         {
             ToggleElement.BindToggleTo(ToggleState);
 
-            var textualRepresentation = ToggleState.Select(GetTextualState).ToReactiveProperty();
+            var textualRepresentation = ToggleState.Select(GetTextualState).ToReadOnlyReactiveProperty();
             textualRepresentation.AddTo(TextElement);
 
             TextElement.BindTextTo(textualRepresentation);

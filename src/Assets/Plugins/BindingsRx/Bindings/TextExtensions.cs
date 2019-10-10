@@ -9,6 +9,9 @@ namespace BindingsRx.Bindings
 {
     public static class TextExtensions
     {
+        public static IDisposable BindTextTo(this Text input, IReadOnlyReactiveProperty<string> property, params IFilter<string>[] filters)
+        { return GenericBindings.Bind(x => input.text = x, property, filters).AddTo(input); }
+
         public static IDisposable BindTextTo(this Text input, IReactiveProperty<string> property, params IFilter<string>[] filters)
         { return GenericBindings.Bind(() => input.text, x => input.text = x, property, BindingTypes.OneWay, filters).AddTo(input); }
         
@@ -38,12 +41,18 @@ namespace BindingsRx.Bindings
 
         public static IDisposable BindFontSizeTo(this Text input, IReactiveProperty<int> property, params IFilter<int>[] filters)
         { return GenericBindings.Bind(() => input.fontSize, x => input.fontSize = x, property, BindingTypes.OneWay, filters).AddTo(input); }
+        
+        public static IDisposable BindFontSizeTo(this Text input, IReadOnlyReactiveProperty<int> property, params IFilter<int>[] filters)
+        { return GenericBindings.Bind(x => input.fontSize = x, property, filters).AddTo(input); }
 
         public static IDisposable BindFontSizeTo(this Text input, Func<int> getter, params IFilter<int>[] filters)
         { return GenericBindings.Bind(() => input.fontSize, x => input.fontSize = x, getter, null, BindingTypes.OneWay, filters).AddTo(input); }
         
         public static IDisposable BindColorTo(this Text input, IReactiveProperty<Color> property, BindingTypes bindingType = BindingTypes.Default, params IFilter<Color>[] filters)
         { return GenericBindings.Bind(() => input.color, x => input.color = x, property, bindingType, filters).AddTo(input); }
+        
+        public static IDisposable BindColorTo(this Text input, IReadOnlyReactiveProperty<Color> property, params IFilter<Color>[] filters)
+        { return GenericBindings.Bind(x => input.color = x, property, filters).AddTo(input); }
 
         public static IDisposable BindColorTo(this Text input, Func<Color> getter, Action<Color> setter, BindingTypes bindingType = BindingTypes.Default, params IFilter<Color>[] filters)
         { return GenericBindings.Bind(() => input.color, x => input.color = x, getter, setter, bindingType, filters).AddTo(input); }

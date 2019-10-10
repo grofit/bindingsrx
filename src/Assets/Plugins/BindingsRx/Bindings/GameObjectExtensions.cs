@@ -36,5 +36,48 @@ namespace BindingsRx.Bindings
 
         public static IDisposable BindTagTo(this GameObject input, Func<string> getter, Action<string> setter, BindingTypes bindingType = BindingTypes.Default, params IFilter<string>[] filters)
         { return GenericBindings.Bind(() => input.tag, x => input.tag = x, getter, setter, bindingType, filters).AddTo(input); }
+
+        public static IDisposable BindChildPrefabsTo<T>(this GameObject input, IReadOnlyReactiveCollection<T> list,
+            GameObject prefab, Action<T, GameObject> onChildCreated = null, Action<T, GameObject> onChildRemoving = null)
+        { return BindChildPrefabsTo(input, list, prefab, GameObject.Instantiate, onChildCreated, onChildRemoving); }
+        
+        public static IDisposable BindChildPrefabsTo<T>(this GameObject input, IReadOnlyReactiveCollection<T> list,
+            GameObject prefab, Func<GameObject, Transform, GameObject> instantiator,
+            Action<T, GameObject> onChildCreated = null, Action<T, GameObject> onChildRemoving = null)
+        {
+            var disposable = new CompositeDisposable();
+
+            void onElementAdded(CollectionAddEvent<T> data)
+            {
+                var newChild = instantiator(prefab, input.transform);
+                onChildCreated?.Invoke(data.Value, newChild);
+            }
+            
+            void onElementUpdated(CollectionReplaceEvent<T> data)
+            {
+                var existingChild = input.transform.GetChild(data.Index);
+                onChildCreated?.Invoke(data.NewValue, existingChild.gameObject);
+            }
+            
+            void onElementRemoved(CollectionRemoveEvent<T> data)
+            {
+                var existingChild = input.transform.GetChild(data.Index);
+                onChildRemoving?.Invoke(data.Value, existingChild.gameObject);
+                GameObject.Destroy(existingChild);
+            }
+
+            list.ObserveAdd().Subscribe(onElementAdded).AddTo(disposable);
+            list.ObserveReplace().Subscribe(onElementUpdated).AddTo(disposable);
+            list.ObserveRemove().Subscribe(onElementRemoved).AddTo(disposable);
+
+            input.transform.DeleteAllChildren();
+            foreach (var element in list)
+            {
+                var newChild = instantiator(prefab, input.transform);
+                onChildCreated?.Invoke(element, newChild);
+            }
+
+            return disposable.AddTo(input);
+        }
     }
 }
