@@ -6,7 +6,7 @@ BindingsRx is a one or two way binding system for unity using unirx.
 
 It allows you to write more succinct code while showing intent for properties which are bound to other properties, and looks something like this:
 
-```
+```c#
 myInputField.BindTextTo(someReactiveProperty);
 // Changing myInputField.text will update someReactiveProperty and vice versa
 ```
@@ -25,28 +25,28 @@ myInputField.BindTextTo(someReactiveProperty);
 
 As mentioned it works with the unirx `ReactiveProperty<T>` but does not need them, so for example if I had a reactive property I could do:
 
-```
+```c#
 var myReactiveProperty = new ReactiveProperty<float>(1.0f);
 mySlider.BindValueTo(myReactiveProperty);
 ```
 
 However if I was working with a 3rd party library I may not have ReactiveProperty objects, so for that I would do:
 
-```
+```c#
 var myNormalValue = 1.0f;
 mySlider.BindValueTo(() => myNormalValue, x => myNormalValue = x);
 ```
 
 You can also specify if you want one way or two way bindings explicitly.
 
-```
+```c#
 var myReactiveProperty = new ReactiveProperty<float>(1.0f);
 mySlider.BindValueTo(myReactiveProperty, BindingTypes.OneWay);
 ```
 
 Here is an example of making a dropdown in the UI bind to a reactive collection:
 
-```
+```c#
 var exampleOptions = new ReactiveCollection<string>();
 exampleOptions.Add("Option 1");
 exampleOptions.Add("Option 2");
